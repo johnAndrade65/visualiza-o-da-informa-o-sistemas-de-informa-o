@@ -12,8 +12,8 @@ data_states = data[data['state'] != 'TOTAL']
 data_states = data_states.rename(columns={
     'totalCases': 'Casos Totais',
     'deaths': 'Mortes Totais',
-    'totalCases_per_100k_inhabitants': 'Casos Totais por 100k Habitantes',
-    'deaths_per_100k_inhabitants': 'Mortes por 100k Habitantes'
+    'totalCases_per_100k_inhabitants': 'Casos Totais por 100 mil Habitantes',
+    'deaths_per_100k_inhabitants': 'Mortes por 100 mil Habitantes'
 })
 
 # 1. Gráfico de Pizza: Distribuição dos casos totais entre os estados
@@ -28,10 +28,10 @@ fig_bar = px.bar(data_states, x='state', y=['Casos Totais', 'Mortes Totais'], ti
 fig_bar.show()
 
 # 3. Dados para o gráfico de linha
-data_line = data_states.melt(id_vars='state', value_vars=['Casos Totais por 100k Habitantes', 'Mortes por 100k Habitantes'],
+data_line = data_states.melt(id_vars='state', value_vars=['Casos Totais por 100 mil Habitantes', 'Mortes por 100 mil Habitantes'],
                              var_name='Métrica', value_name='Valor')
 
 # Gráfico de Linha: Casos totais por 100k habitantes vs. Mortes por 100k habitantes
-fig_line = px.line(data_line, x='state', y='Valor', color='Métrica', title='Casos Totais por 100k Habitantes vs. Mortes por 100k Habitantes',
+fig_line = px.line(data_line, x='state', y='Valor', color='Métrica', title='Casos Totais por 100mil Habitantes vs. Mortes por 100mil Habitantes',
                    labels={'state': 'Estado', 'Valor': 'Valor', 'Métrica': 'Métrica'})
 fig_line.show()
